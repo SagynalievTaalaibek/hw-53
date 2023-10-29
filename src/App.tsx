@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import AddTaskForm from './TaskComponents/AddTaskForm';
 import Task from './TaskComponents/Task';
@@ -16,20 +16,20 @@ const App = () => {
     {id: '3', task: 'Do task3'},
   ]);
 
-  const [newTask, setNewTask] = useState<string>('');
+  let currentTask: string = '';
 
   const addTask = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTask(event.target.value);
+    currentTask = event.target.value;
   };
 
-  const btnAdd = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+  const btnAddSecond = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    if (newTask) {
+    if (currentTask) {
       setTasks((prevState) => [
         ...prevState,
-        { id: (Math.random() * 10000).toString(), task: newTask },
+        {id: (Math.random() * 10000).toString(), task: currentTask}
       ]);
-      setNewTask('');
     }
   };
 
@@ -51,7 +51,7 @@ const App = () => {
     <div>
       <AddTaskForm
         onTaskChange={addTask}
-        add={btnAdd}
+        add={btnAddSecond}
       />
       <div>
         {taskList}
